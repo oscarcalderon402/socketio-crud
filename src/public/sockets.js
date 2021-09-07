@@ -1,5 +1,9 @@
 const socket = io();
-
+/**
+ * create a new note
+ * @param {string} title  title a title for a new note
+ * @param {string} description description a description for a new note
+ */
 const saveNote = (title, description) => {
   socket.emit('client:newnote', {
     title,
@@ -7,10 +11,20 @@ const saveNote = (title, description) => {
   });
 };
 
+/**
+ * delete a note based on an Id
+ * @param {string} id a note ID
+ */
 const deleteNote = (id) => {
   socket.emit('client:deletenote', id);
 };
 
+/**
+ *
+ * @param {string} id note ID
+ * @param {string} title note title
+ * @param {string} description note description
+ */
 const getNote = (id) => {
   socket.emit('client:getnote', id);
 };

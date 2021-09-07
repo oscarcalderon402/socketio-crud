@@ -35,8 +35,15 @@ io.on('connection', (socket) => {
     socket.emit('server:selectednote', note);
   });
 
-  socket.on('client:updatenote', (note) => {
-    console.log(note);
+  socket.on('client:updatenote', (updateNote) => {
+    notes = notes.map((note) => {
+      if (note.id === updateNote.id) {
+        note.title = updateNote.title;
+        note.description = updateNote.description;
+      }
+      return note;
+    });
+    io.emit('server:loadnotes', notes);
   });
 });
 
